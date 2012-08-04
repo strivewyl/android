@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <!-- 课时名编辑 -->
+
+    <EditText
+        android:id="@+id/classhour_edit_item_name"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="10"
+        android:hint="@string/classhour_input_hint"
+        android:inputType="number"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/classhour_edit_item_beginhour"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="2dp"
+        android:layout_weight="4.5"
+        android:hint="@string/classhour_edit_item_hourtime_hint"
+        android:inputType="number"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/classhour_edit_item_time_separator" />
+
+    <EditText
+        android:id="@+id/classhour_edit_item_beginminute"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="3dp"
+        android:layout_weight="4.5"
+        android:hint="@string/classhour_edit_item_minutetime_hint"
+        android:inputType="number"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/classhour_edit_item_endhour"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="3dp"
+        android:layout_weight="4.5"
+        android:hint="@string/classhour_edit_item_hourtime_hint"
+        android:inputType="number"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/classhour_edit_item_time_separator" />
+
+    <EditText
+        android:id="@+id/classhour_edit_item_endminute"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="2dp"
+        android:layout_weight="4.5"
+        android:hint="@string/classhour_edit_item_minutetime_hint"
+        android:inputType="number"
+        android:singleLine="true" />
+
+    <ImageButton
+        android:id="@+id/classhour_edit_item_save"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="10"
+        android:background="#00000000"
+        android:contentDescription="@string/classhour_edit_item_save"
+        android:src="@drawable/save" />
+
+</LinearLayout>

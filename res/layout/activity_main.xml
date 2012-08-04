@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/mainbackgroud" 
+    android:gravity="center">
+
+    <view
+        class="com.ly.university.assistant.costumView.AlwaysFocusedTextView"
+        android:id="@+id/tv"
+        android:focusable="true"
+        android:layout_width="262dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="@string/maincontent"
+        android:textColor="#11264f"
+        android:textColorLink="@color/honeycombish_blue"
+        android:textSize="27.5pt"
+        android:textStyle="bold|italic" >
+    </view>
+    
+
+    <LinearLayout android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <ImageButton android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:background="#00000000"
+            android:id="@+id/ibtn1"
+            android:src="@drawable/test"
+            android:contentDescription="@string/class_assistant"
+            
+            />
+        <ImageButton android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:background="#00000000"
+            android:id="@+id/ibtn2"
+            android:src="@drawable/test"
+            android:contentDescription="@string/positive"
+            />
+        
+    </LinearLayout>
+
+        <LinearLayout android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+       <ImageButton android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:background="#00000000"
+            android:id="@+id/ibtn3"
+            android:src="@drawable/test"
+            android:contentDescription="@string/health"
+            />
+       <ImageButton android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:background="#00000000"
+            android:id="@+id/ibtn4"
+            android:src="@drawable/test"
+            android:contentDescription="@string/weather_forecast"
+            />
+        
+    </LinearLayout>
+    
+
+</LinearLayout>

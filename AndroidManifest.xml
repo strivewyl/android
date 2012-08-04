@@ -1,0 +1,37 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ly.university.assistant"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="15" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AndroidDevelopers" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".C_A_MainActivity"
+            android:label="@string/class_assistant" >
+        </activity>
+        <activity
+            android:name=".C_A_EditActivity"
+            android:label="@string/ca_classhour_edit" >
+        </activity>
+         <activity
+            android:name=".C_A_SettingActivity"
+            android:label="@string/ca_classhour_edit" >
+        </activity>
+    </application>
+
+</manifest>
