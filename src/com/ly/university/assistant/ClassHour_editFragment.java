@@ -84,11 +84,14 @@ public class ClassHour_editFragment extends Fragment implements OnClickListener 
 			break;
 		case R.id.btn_classhour_edit:
 			// 更改本行为编辑状态
+			Log.v("edit", "编辑");
 			index = root.indexOfChild((ViewGroup) v.getParent());
 			vg = (ViewGroup) v.getParent();
 			name = ((TextView) vg.getChildAt(0)).getText().toString();
 			begin = ((TextView) vg.getChildAt(1)).getText().toString();
 			end = ((TextView) vg.getChildAt(2)).getText().toString();
+			root.removeViewAt(index);
+			
 			item = lf.inflate(R.layout.classhour_display_edit_item, null);
 			((TextView) item.findViewById(R.id.class_hour_name)).setText(name);
 			((TextView) item.findViewById(R.id.start_time)).setText(begin);
@@ -97,6 +100,7 @@ public class ClassHour_editFragment extends Fragment implements OnClickListener 
 					.setOnClickListener(this);
 			((ImageButton) item.findViewById(R.id.btn_classhour_delete))
 					.setOnClickListener(this);
+			root.addView(item, index);
 			break;
 		case R.id.btn_classhour_update:
 			index = root.indexOfChild((ViewGroup) v.getParent());
@@ -105,6 +109,8 @@ public class ClassHour_editFragment extends Fragment implements OnClickListener 
 			begin = ((TextView) vg.getChildAt(1)).getText().toString();
 			end = ((TextView) vg.getChildAt(2)).getText().toString();
 			item = lf.inflate(R.layout.classhour_edit_item, null);
+			root.removeViewAt(index);
+			
 			((EditText) item.findViewById(R.id.classhour_edit_item_name))
 					.setText(name);
 			((EditText) item.findViewById(R.id.classhour_edit_item_beginhour))
@@ -117,6 +123,7 @@ public class ClassHour_editFragment extends Fragment implements OnClickListener 
 					.setText(end.split(":")[1]);
 			((ImageButton) item.findViewById(R.id.classhour_edit_item_save))
 					.setOnClickListener(this);
+			root.addView(item, index);
 			break;
 		}
 	}

@@ -36,7 +36,7 @@
             android:id="@+id/btn_classhour_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:src="@drawable/edit"
             android:contentDescription="@string/classhour_edit_item_edit"
             />

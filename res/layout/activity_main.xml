@@ -10,7 +10,7 @@
         class="com.ly.university.assistant.costumView.AlwaysFocusedTextView"
         android:id="@+id/tv"
         android:focusable="true"
-        android:layout_width="262dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
@@ -19,7 +19,9 @@
         android:textColor="#11264f"
         android:textColorLink="@color/honeycombish_blue"
         android:textSize="27.5pt"
-        android:textStyle="bold|italic" >
+        android:textStyle="bold|italic" 
+        android:layout_margin="10dp"
+        >
     </view>
     
 
@@ -34,8 +36,7 @@
             android:background="#00000000"
             android:id="@+id/ibtn1"
             android:src="@drawable/test"
-            android:contentDescription="@string/class_assistant"
-            
+            android:contentDescription="@string/class_assistant"           
             />
         <ImageButton android:layout_weight="1"
             android:layout_height="fill_parent"
