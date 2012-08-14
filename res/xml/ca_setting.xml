@@ -12,8 +12,8 @@
     </CheckBoxPreference>   
 	<ListPreference 
 		android:dialogTitle="@string/mode_choose" 
-		android:entryValues="@array/class_mode_keys" 
-		android:entries="@array/class_mode_values" 
+		android:entryValues="@array/class_mode_values" 
+		android:entries="@array/class_mode_keys" 
 		android:positiveButtonText="@string/ok" 
 		android:negativeButtonText="@string/cancle" 
 		android:dependency="class_mode_setting" 

@@ -13,7 +13,7 @@
         android:layout_height="fill_parent"
         android:layout_weight="10"
         android:hint="@string/classhour_input_hint"
-        android:inputType="number"
+        android:inputType="text"
         android:singleLine="true" />
 
     <EditText

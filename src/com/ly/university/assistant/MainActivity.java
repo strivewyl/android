@@ -7,13 +7,10 @@ import java.util.TimerTask;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
-import com.ly.university.assistant.costumView.AlwaysFocusedTextView;
-
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -58,6 +55,12 @@ public class MainActivity extends RoboSherlockActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		//测试使用
+//		DatabaseHelper dbh = new DatabaseHelper(this); 
+//		SQLiteDatabase db=dbh.getWritableDatabase();
+//		db.close();
+		
 
 		// 设置监听器
 		ibtn1.setOnClickListener(this);
@@ -121,7 +124,8 @@ public class MainActivity extends RoboSherlockActivity implements
 		if (sp == null || sp.getBoolean(IS_FIRSTIME_OPEN, false)) {
 			Log.v(TAG, "第一次打开程序。");
 			// 转向功能介绍：
-
+			
+			//设置为非第一次打开程序
 			SharedPreferences.Editor editer = sp.edit();
 			editer.putBoolean(IS_FIRSTIME_OPEN, true);
 			editer.commit();

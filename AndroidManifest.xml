@@ -25,7 +25,11 @@
             android:label="@string/class_assistant" >
         </activity>
         <activity
-            android:name=".C_A_EditActivity"
+            android:name=".C_A_ClassHourEditActivity"
+            android:label="@string/ca_classhour_edit" >
+        </activity>
+          <activity
+            android:name=".C_A_ScheduleEditActivity"
             android:label="@string/ca_classhour_edit" >
         </activity>
          <activity

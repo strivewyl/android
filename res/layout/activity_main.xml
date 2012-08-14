@@ -7,7 +7,7 @@
     android:gravity="center">
 
     <view
-        class="com.ly.university.assistant.costumView.AlwaysFocusedTextView"
+        class="com.ly.university.assistant.AlwaysFocusedTextView"
         android:id="@+id/tv"
         android:focusable="true"
         android:layout_width="fill_parent"
