@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <!-- 课时名编辑 -->
+    <TextView android:id="@+id/classname"
+        android:layout_height="fill_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1" 
+        android:singleLine="true"
+        android:gravity="center"
+        android:background="@drawable/textview_bottom"/>
+
+    <EditText
+        android:id="@+id/subject"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:inputType="text"
+        android:singleLine="true"
+        android:background="@drawable/textview_bottom" />
+     <EditText
+        android:id="@+id/address"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:inputType="text"
+        android:singleLine="true" 
+        android:background="@drawable/textview_bottom"/>
+    <Button android:id="@+id/save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/save"/>
+  
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:gravity="center_vertical">
+    
+      <TextView android:id="@+id/classname"
+          android:layout_width="0dp"
+          android:layout_height="fill_parent"
+          android:singleLine="true"
+          android:ellipsize="end"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:background="@drawable/textview_bottom"
+          />
+       <TextView android:id="@+id/subject"
+          android:layout_width="0dp"
+          android:layout_height="fill_parent"
+          android:singleLine="true"
+          android:ellipsize="end"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:background="@drawable/textview_bottom"
+          />
+        <TextView android:id="@+id/address"
+          android:layout_width="0dp"
+          android:layout_height="fill_parent"
+          android:singleLine="true"
+          android:ellipsize="end"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:background="@drawable/textview_bottom"
+          />
+        <Button android:id="@+id/btn_edit"
+            android:layout_width="0dp" 
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/classhour_edit_item_edit"/>
+    
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/scroll" >
+
+    <fragment android:name="com.ly.university.assistant.C_A_ClassHour_editFragment"
+        android:id="@+id/classhour"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
+</ScrollView>

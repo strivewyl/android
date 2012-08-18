@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:minWidth="250dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/DialogText.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:background="@drawable/title"
+            android:minWidth="40dp"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip" 
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/DialogText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/subject" 
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/subject"
+                style="@style/DialogText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="2dip" 
+                android:layout_weight="1"/>
+        </LinearLayout>
+         <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/DialogText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/address" 
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/address"
+                style="@style/DialogText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="2dip"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:gravity="center">
+
+            <TextView
+                style="@style/DialogText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/start_time"
+                android:layout_weight="1" 
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/start_time"
+                style="@style/DialogText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="2dip" />
+        </LinearLayout>
+          <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/DialogText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/end_time"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/end_time"
+                style="@style/DialogText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="2dip" />
+        </LinearLayout>
+       
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/footer"
+        android:orientation="horizontal" 
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/positiveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/button_backgroud"
+            android:singleLine="true"
+            android:text="@string/ok" />
+    </RelativeLayout>
+
+</LinearLayout>
