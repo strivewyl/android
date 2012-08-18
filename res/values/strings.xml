@@ -50,4 +50,14 @@
     <string name="subject">科目</string>
     <string name="clear">清除</string>
     <string name="save">保存</string>
+    <string name="class_mode">上课模式设置</string>
+    <string name="class_mode_summary">选择您上课的手机状态</string>
+    <string name="clock_title">提醒设置</string>
+    <string name="clock_mode_summary">选择提醒您上课的方式</string>
+    <string name="clock_mode_choose_summary">请选择您的提醒方式</string>
+    <string name="ringtone_choose">请选择您的提醒铃声</string>
+    <string name="ringtone_setting">铃声设置</string>
+    <string name="class_name">课时</string>
+    <string name="class_alarm">上课提醒</string>
+
 </resources>

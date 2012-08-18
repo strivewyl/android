@@ -87,7 +87,7 @@ public class C_A_MainActivity extends RoboSherlockFragmentActivity implements
 		// CustomDialog.Builder(this).setMessage(subject, address, start_time,
 		// end_time);
 		final int id = dialogId;
-		Log.e("C_A_MainActivity", "点击了" + dialogId);
+		Log.v("C_A_MainActivity", "点击了" + dialogId);
 		C_A_CustomDialog.Builder dialogBuilder = new C_A_CustomDialog.Builder(this);
 		dialogBuilder
 				.setMessage(currentSubject, currentAddress, currentStartTime,
@@ -141,7 +141,7 @@ public class C_A_MainActivity extends RoboSherlockFragmentActivity implements
 	@Override
 	public void onListItemClick(int position, String title, String subject,
 			String address, String start, String end) {
-		Log.e("onClicke", "点击了"+position);
+		Log.v("onClicke", "点击了"+position);
 		this.currentTitle = title;
 		this.currentAddress = address;
 		this.currentSubject = subject;

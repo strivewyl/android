@@ -28,14 +28,41 @@
             android:name=".C_A_ClassHourEditActivity"
             android:label="@string/ca_classhour_edit" >
         </activity>
-          <activity
+        <activity
             android:name=".C_A_ScheduleEditActivity"
             android:label="@string/ca_classhour_edit" >
         </activity>
-         <activity
+        <activity
             android:name=".C_A_SettingActivity"
             android:label="@string/ca_classhour_edit" >
         </activity>
+        <activity
+            android:name=".businesslogic.C_A_AlarmActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="上课提醒"
+            android:theme="@style/dialog" 
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>
+
+        <receiver android:name=".businesslogic.StartupBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" >
+                </action>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".businesslogic.C_A_TimingService" > </service>
+        <receiver android:name=".businesslogic.C_A_ClassModeBroadcastReceiver" > </receiver>
+        <receiver android:name=".businesslogic.C_A_AlarmBroadcastReciver" > </receiver>
     </application>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+     <uses-permission android:name="android.permission.CAMERA" /> 
 
 </manifest>

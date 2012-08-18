@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
-   
+   <PreferenceCategory
+       android:title="@string/class_mode"
+       android:summary="@string/class_mode_summary">
     <CheckBoxPreference 
     	android:defaultValue="true" 
     	android:summaryOff="@string/off" 
@@ -37,9 +39,11 @@
 	     android:title="@string/input_lock_password"
 	     android:dependency="class_lock_setting">	     
 	 </EditTextPreference>
+ </PreferenceCategory>
 	 
-	 
-	 
+<PreferenceCategory 
+    android:title="@string/clock_title"
+    android:summary="@string/clock_mode_summary"> 
 	 
 	  <CheckBoxPreference 
     	android:defaultValue="true" 
@@ -55,5 +59,26 @@
 	     android:dependency="class_clock_setting"
 	     android:inputType="number">	     
 	 </EditTextPreference>
+	 <ListPreference 
+	     android:key="alarm_mode"
+		android:dialogTitle="@string/mode_choose" 
+		android:entryValues="@array/clock_mode_values" 
+		android:entries="@array/clock_mode_keys" 
+		android:positiveButtonText="@string/ok" 
+		android:negativeButtonText="@string/cancle" 
+		android:dependency="class_clock_setting" 
+		android:title="@string/mode_choose" 
+		android:summary="@string/clock_mode_choose_summary" 
+		android:defaultValue="0">
+	</ListPreference>
+	 <RingtonePreference
+	     
+	     android:dependency="class_clock_setting"
+            android:key="alarm_ringtone"
+            android:summary="@string/ringtone_choose"
+            android:title="@string/ringtone_setting"
+            android:ringtoneType="all"
+            android:showSilent="false" />
+ </PreferenceCategory>	
 	 	
 </PreferenceScreen>
