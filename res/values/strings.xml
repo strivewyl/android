@@ -59,5 +59,11 @@
     <string name="ringtone_setting">铃声设置</string>
     <string name="class_name">课时</string>
     <string name="class_alarm">上课提醒</string>
-
+    <string name="keyguard_line1">上课助手提醒您: </string>
+    <string name="keyguard_line2">专心听课!</string>
+    <string name="keyguard_line3">请勿玩弄手机!</string>
+    <string name="keyguard_line4">注:如有特殊事情,输入密码开锁:</string>
+    <string name="password">请输入开锁密码</string>
+    <string name="unlock">开锁</string>
+    <string name="click_unlock">点击开锁</string>
 </resources>

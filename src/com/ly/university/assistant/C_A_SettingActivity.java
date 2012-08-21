@@ -106,7 +106,8 @@ public class C_A_SettingActivity extends PreferenceActivity implements OnPrefere
     	if(preference==pretime){
     		Log.v("pretime","检查格式");
     		try{
-    			Integer.parseInt((String)newValue);
+    			int pre= Integer.parseInt((String)newValue);
+    			if(pre<1||pre>60) throw new Exception();
     		}catch(Exception e){
     			Toast.makeText(this, "输入分钟数有误,请输入一个1--60的数字",Toast.LENGTH_SHORT).show();
     			return false;

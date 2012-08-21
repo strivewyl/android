@@ -2,7 +2,6 @@
     package="com.ly.university.assistant"
     android:versionCode="1"
     android:versionName="1.0" >
-
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="15" />
@@ -37,13 +36,17 @@
             android:label="@string/ca_classhour_edit" >
         </activity>
         <activity
+            android:name=".businesslogic.C_A_LockActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
             android:name=".businesslogic.C_A_AlarmActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
             android:label="上课提醒"
-            android:theme="@style/dialog" 
             android:launchMode="singleTask"
             android:taskAffinity=""
-            android:excludeFromRecents="true">
+            android:theme="@style/dialog" >
         </activity>
 
         <receiver android:name=".businesslogic.StartupBroadcastReceiver" >
@@ -53,9 +56,15 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".businesslogic.C_A_TimingService" > </service>
-        <receiver android:name=".businesslogic.C_A_ClassModeBroadcastReceiver" > </receiver>
-        <receiver android:name=".businesslogic.C_A_AlarmBroadcastReciver" > </receiver>
+        <service android:name=".businesslogic.C_A_TimingService" >
+        </service>
+        <service android:name=".businesslogic.C_A_LockService" >
+        </service>
+
+        <receiver android:name=".businesslogic.C_A_ClassModeBroadcastReceiver" >
+        </receiver>
+        <receiver android:name=".businesslogic.C_A_AlarmBroadcastReciver" >
+        </receiver>
     </application>
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -63,6 +72,11 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.VIBRATE" />
-     <uses-permission android:name="android.permission.CAMERA" /> 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW" />
+    <uses-permission android:name= "android.permission.READ_PHONE_STATE"/>
+    
 
 </manifest>

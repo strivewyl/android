@@ -74,6 +74,7 @@ public class C_A_TimingService extends IntentService {
 			setTime.set(Calendar.SECOND, 0);
 			Intent  classmode =  new Intent(this,C_A_ClassModeBroadcastReceiver.class);
 			classmode.putExtra("classname", nextClassMessage[0]);
+			classmode.putExtra("end", nextClassMessage[2]);
 			int day = setTime.get(Calendar.DAY_OF_WEEK)-1;
 			classmode.putExtra("week_day", day==0?7:day);
 			((AlarmManager) this.getSystemService(Activity.ALARM_SERVICE)).set(AlarmManager.RTC_WAKEUP, setTime.getTimeInMillis(), 

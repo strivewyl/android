@@ -123,7 +123,7 @@ public class MainActivity extends RoboSherlockActivity implements
 		SharedPreferences sp = getPreferences(Activity. MODE_PRIVATE);
 		if (sp == null || sp.getBoolean(IS_FIRSTIME_OPEN, false)) {
 			Log.v(TAG, "第一次打开程序。");
-			// 转向功能介绍：
+			// 添加代码,  转向功能介绍：
 			
 			//设置为非第一次打开程序
 			SharedPreferences.Editor editer = sp.edit();

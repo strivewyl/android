@@ -352,6 +352,7 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 			bm = Integer.parseInt(begin_minute);
 			eh = Integer.parseInt(end_hour);
 			em = Integer.parseInt(end_minute);
+			if(bh<0 || bh>23 || eh<0 || eh>23 || em<0 ||em>59 || bm<0 || bm>59) return null;
 			if(bh*60+bm > eh*60+em) return null;
 			return new String[]{( bh<10 && begin_hour.charAt(0)!='0' ? ""+0+begin_hour : begin_hour ) +":"
 					+ ((bm<10 && begin_minute.charAt(0)!='0')? ""+0+begin_minute : begin_minute) 

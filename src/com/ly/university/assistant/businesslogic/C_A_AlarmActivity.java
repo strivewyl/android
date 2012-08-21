@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -102,6 +103,7 @@ public class C_A_AlarmActivity extends Activity {
 			case 1://响铃
 				mediaPlayer = MediaPlayer.create(this
 						, Uri.parse(PreferenceManager.getDefaultSharedPreferences(this).getString(C_A_SettingActivity.CLASS_CLOCK_RingTone, "")));
+				mediaPlayer.setAudioStreamType(AudioManager.MODE_RINGTONE);
 				break;
 			default://震动响铃
 				vibrator =  (Vibrator) getSystemService(VIBRATOR_SERVICE); 
@@ -114,8 +116,13 @@ public class C_A_AlarmActivity extends Activity {
 				public void handleMessage(Message msg) {
 					if(msg.what==0){//处理震动后响铃问题.
 						if(mediaPlayer != null){
-							mediaPlayer.start();
-							mediaPlayer.setLooping(true);
+							try {
+								mediaPlayer.start();
+								mediaPlayer.setLooping(true);
+							} catch (Exception e) {
+								Log.v("mediaPlayer State Exceptiont", "播放闹铃异常");
+							}
+
 						}
 					}else {//处理超时问题
 						Notification n = new Notification(R.drawable.notification_icon, "上课提醒无应答", System.currentTimeMillis());
@@ -179,14 +186,17 @@ public class C_A_AlarmActivity extends Activity {
 		}
 		if(vibrator != null){
 			vibrator.cancel();
+			vibrator = null;
 		}
 		if(mediaPlayer != null){
 			if(mediaPlayer.isPlaying()) mediaPlayer.stop();
 			mediaPlayer.release();
+			mediaPlayer = null;
 		}
 		if(timer !=null){
 			timer.cancel();
 			camera.release();
+			camera = null;
 		}
 
 
