@@ -66,4 +66,6 @@
     <string name="password">请输入开锁密码</string>
     <string name="unlock">开锁</string>
     <string name="click_unlock">点击开锁</string>
+    <string name="start">开始成功快乐的大学生活</string>
+    <string name="click_input">点击输入</string>
 </resources>

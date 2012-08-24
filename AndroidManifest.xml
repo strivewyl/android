@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:installLocation="auto"
     package="com.ly.university.assistant"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="大学助手  2.0\n(上课助手 1.0升级)" >
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="15" />
@@ -12,7 +13,8 @@
         android:theme="@style/Theme.AndroidDevelopers" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,32 +23,74 @@
         </activity>
         <activity
             android:name=".C_A_MainActivity"
-            android:label="@string/class_assistant" >
+            android:label="@string/class_assistant" 
+            android:configChanges="orientation|keyboardHidden|navigation"
+            >
+        </activity>
+        <activity android:name=".FunctionGuideActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         </activity>
         <activity
             android:name=".C_A_ClassHourEditActivity"
-            android:label="@string/ca_classhour_edit" >
+            android:label="@string/ca_classhour_edit"
+            android:configChanges="orientation|keyboardHidden|navigation"
+             >
         </activity>
         <activity
             android:name=".C_A_ScheduleEditActivity"
-            android:label="@string/ca_classhour_edit" >
+            android:label="@string/ca_classhour_edit" 
+            android:configChanges="orientation|keyboardHidden|navigation"
+            >
         </activity>
         <activity
             android:name=".C_A_SettingActivity"
-            android:label="@string/ca_classhour_edit" >
+            android:theme="@style/perference_set_activity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            
+            >
         </activity>
         <activity
             android:name=".businesslogic.C_A_LockActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"
+             >
         </activity>
         <activity
+            android:name=".ContactActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="portrait"
+            >
+            </activity>
+             <activity
+            android:name=".C_A_HelpActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="portrait"
+            >
+              </activity>  
+            
+         <activity
+            android:name=".C_A_ClassHourHelpActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="portrait"
+            >
+              </activity>  
+               <activity
+            android:name=".C_A_ScheduleHelpActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:screenOrientation="portrait"
+            >
+              </activity>  
+            
+            
+        <activity
             android:name=".businesslogic.C_A_AlarmActivity"
-            android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true"
             android:label="上课提醒"
             android:launchMode="singleTask"
             android:taskAffinity=""
-            android:theme="@style/dialog" >
+            android:theme="@style/dialog"
+            android:configChanges="orientation|keyboardHidden|navigation">
         </activity>
 
         <receiver android:name=".businesslogic.StartupBroadcastReceiver" >
@@ -77,6 +121,6 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW" />
     <uses-permission android:name= "android.permission.READ_PHONE_STATE"/>
-    
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
 </manifest>

@@ -20,6 +20,7 @@
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:inputType="text"
+        android:hint="@string/click_input"
         android:singleLine="true"
         android:background="@drawable/textview_bottom" />
      <EditText
@@ -29,6 +30,7 @@
         android:layout_weight="1"
         android:inputType="text"
         android:singleLine="true" 
+        android:hint="@string/click_input"
         android:background="@drawable/textview_bottom"/>
     <Button android:id="@+id/save"
         android:layout_width="0dp"

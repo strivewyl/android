@@ -2,7 +2,8 @@ package com.ly.university.assistant.businesslogic;
 
 import java.util.Calendar;
 import com.ly.university.assistant.C_A_SettingActivity;
-import com.ly.university.assistant.persistence.DatabaseHelper;
+import com.ly.university.assistant.util.DatabaseHelper;
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.IntentService;
@@ -32,6 +33,7 @@ public class C_A_TimingService extends IntentService {
 	protected void onHandleIntent(Intent arg) {
 		Calendar setTime = Calendar.getInstance();
 		String[] nextClassMessage = getNextClassMessage();
+		if(nextClassMessage==null) return;//空数据库
 		String begin = nextClassMessage[1];
 		int begin_hour = Integer.parseInt(begin.split(":")[0]);
 		int begin_minute = Integer.parseInt(begin.split(":")[1]);
@@ -85,23 +87,25 @@ public class C_A_TimingService extends IntentService {
 	/**
 	 * 
 	 * @return 返回当前时间的下一节课的信息.
-	 * 索引: 0: 课时名  1:上课时间字符串   2: 下课时间字符串  3: 增加天数(今天0,明天1)
+	 * 索引: 0: 课时名  1:上课时间字符串   2: 下课时间字符串  3: 增加天数(今天0,明天1.......)
 	 */
 	String[] getNextClassMessage(){
 		SQLiteDatabase db = new DatabaseHelper(this).getReadableDatabase();
 		Calendar now = Calendar.getInstance();
 		String hour =""+ now.get(Calendar.HOUR_OF_DAY);
 		String minute=""+ now.get(Calendar.MINUTE);
-		String begin = ( Integer.parseInt(hour)<10 && hour.charAt(0)!='0' ? ""+0+hour : hour ) +":"
-				+ ((Integer.parseInt(minute)<10 && minute.charAt(0)!='0')? ""+0+minute : minute) ;
+		String begin = ( Integer.parseInt(hour)<10 && hour.length()==1? ""+0+hour : hour ) +":"
+				+ (Integer.parseInt(minute)<10 && minute.length()==1? ""+0+minute : minute) ;
 		Cursor c = db.rawQuery("SELECT ID AS _id,CLASSNAME, BEGIN, END FROM TIME WHERE BEGIN>? ORDER BY BEGIN",  new String[]{begin});
 		//今天没有课,处理
 		if(c.getCount()<1){
 			c.close();
-			Cursor nc =db.rawQuery("SELECT ID AS _id,CLASSNAME, BEGIN, END FROM TIME  ORDER BY BEGIN", null);
-			nc.moveToFirst();
-			String[] reslut = new String[]{nc.getString(1),nc.getString(2),nc.getString(3),""+1};
-			nc.close();
+			c=null;
+			c =db.rawQuery("SELECT ID AS _id,CLASSNAME, BEGIN, END FROM TIME  ORDER BY BEGIN", null);
+			if(c.getCount()==0) return null; //数据库中空数据
+			c.moveToFirst();
+			String[] reslut = new String[]{c.getString(1),c.getString(2),c.getString(3),""+1};
+			c.close();
 			db.close();
 			return reslut;
 		}

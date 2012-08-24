@@ -2,7 +2,6 @@ package com.ly.university.assistant.businesslogic;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import com.ly.university.assistant.C_A_SettingActivity;
 import com.ly.university.assistant.R;
 import android.app.Activity;
@@ -27,17 +26,12 @@ public class C_A_LockActivity extends Activity {
 
 	public static C_A_LockActivity instance;
 	Timer timer;
-	TimerTask task;
-
-	public C_A_LockActivity() {
-		super();
-		instance = this;
-	}
+	Handler handler;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+		
 		setContentView(R.layout.keyguard_layout);
 		final EditText password = (EditText) findViewById(R.id.password);
 		// 设置时间日期
@@ -67,7 +61,7 @@ public class C_A_LockActivity extends Activity {
 		final TextView click_unlock = (TextView) findViewById(R.id.click_unlock);
 		final TextView line1 = (TextView) findViewById(R.id.line1);
 		final TextView line2 = (TextView) findViewById(R.id.line2);
-		final Handler handler = new Handler() {
+	    handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
@@ -96,19 +90,6 @@ public class C_A_LockActivity extends Activity {
 			}
 		};
 
-		timer = new Timer();
-		task = new TimerTask() {
-			int i = 0;
-
-			@Override
-			public void run() {
-				handler.sendEmptyMessage(i);
-				Log.v("锁屏动画", "锁屏"+i);
-				i++;
-				i %= 4;
-			}
-		};
-
 		ImageButton btn = (ImageButton) findViewById(R.id.btn);
 		btn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -131,27 +112,51 @@ public class C_A_LockActivity extends Activity {
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		timer.schedule(task, 0, 1000);
+	public void onResume() {
+		super.onResume();
+		instance=this;
+		if(timer ==null)  timer = new Timer();
+		timer.schedule(new TimerTask() {
+			int i = 0;
+
+			@Override
+			public void run() {
+				handler.sendEmptyMessage(i);
+				Log.v("锁屏动画", "锁屏"+i);
+				i++;
+				i %= 4;
+			}
+		}
+   , 0, 1000);
 	}
 
 	@Override
-	public void onStop() {
-		super.onStop();
+	public void onPause() {
+		super.onPause();
 		timer.cancel();
+		timer = null;
 	}
 
-	// @Override
-	// public void onAttachedToWindow()
-	// {
-	// getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD); //屏蔽Home建
-	// //getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-	// //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-	// super.onAttachedToWindow();
-	// }
-	// 屏蔽掉Back键
+	 @Override
+	 public void onAttachedToWindow()
+	 {
+				Log.v("Handler", "设置窗口属性 ");
+				new Handler().postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						C_A_LockActivity.this.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+					}
+				}, 200);
 
+	 //getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD); //屏蔽Home建
+	 //getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+	 //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+	 super.onAttachedToWindow();
+	 }
+	
+	// 屏蔽掉Back键
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
@@ -161,12 +166,5 @@ public class C_A_LockActivity extends Activity {
 			Log.v("其它建按了啊", "其它建按了啊");
 			return super.onKeyDown(keyCode, event);
 		}
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		instance = null;
-		Log.v("instance", "instance制空了");
 	}
 }

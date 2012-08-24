@@ -1,57 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:minHeight="25dp"
+    android:layout_marginTop="5dp" >
     
     <TextView android:id="@+id/classname"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
         android:singleLine="true"
         android:ellipsize="end"
         android:gravity="center"
+        android:textColor="@color/TextColor"
+        android:textSize="16sp"
         />
 
      <TextView android:id="@+id/subject"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
         android:singleLine="true"
         android:ellipsize="end"
         android:gravity="center"
+        android:textColor="@color/TextColor"
+        android:textSize="16sp"
         />
       <TextView android:id="@+id/address"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
         android:singleLine="true"
         android:ellipsize="end"
         android:gravity="center"
+        android:textColor="@color/TextColor"
+        android:textSize="16sp"
         />
        <TextView android:id="@+id/begin"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_weight="0.7"
         android:singleLine="true"
         android:ellipsize="end"
         android:gravity="center"
+        android:textColor="@color/TextColor"
+        android:textSize="16sp"
         />
         <TextView android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.2"
         android:singleLine="true"
+        android:textColor="@color/TextColor"
         android:text="@string/period_separator"
         android:gravity="center"
         
         />
         <TextView android:id="@+id/end"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_weight="0.7"
         android:singleLine="true"
         android:ellipsize="end"
         android:gravity="center"
+        android:textColor="@color/TextColor"
+        android:textSize="16sp"
         />
 
 </LinearLayout>

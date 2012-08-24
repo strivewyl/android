@@ -1,6 +1,7 @@
 package com.ly.university.assistant.businesslogic;
 
 import java.util.Calendar;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -73,7 +74,7 @@ public class C_A_AlarmActivity extends Activity {
 		int minutes = Integer.parseInt(begintext.split(":")[0])*60 + Integer.parseInt(begintext.split(":")[1])
 				- now.get(Calendar.HOUR_OF_DAY)*60-now.get(Calendar.MINUTE);
 		if(minutes > 0)   message.setText("您距离"+cname+"还有最后"+minutes+"分钟"+", 赶快去上课吧!");
-		else  message.setText("您已经错过了"+cname+", 下次可要注意了哦!");
+		else  message.setText("您已经错过了\""+cname+"\", 下次可要注意了哦!");
 		classname.setText(cname);
 		begin.setText(begintext);
 		end.setText(intent.getStringExtra("end"));
@@ -198,7 +199,65 @@ public class C_A_AlarmActivity extends Activity {
 			camera.release();
 			camera = null;
 		}
-
-
+	}
+	@Override
+	public void finish(){
+		super.finish();
+		randomAnim();
+	}
+	
+	void randomAnim(){
+		Random random = new Random();
+		int i = random.nextInt(12);
+		Log.v("动画师", ""+i);
+		switch (i) {
+		case 0:
+			overridePendingTransition(R.anim.fade, R.anim.hold);
+			break;
+		case 1:
+			overridePendingTransition(R.anim.my_scale_action,
+					R.anim.my_alpha_action);
+			break;
+		case 2:
+			overridePendingTransition(R.anim.scale_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 3:
+			overridePendingTransition(R.anim.scale_translate_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 4:
+			overridePendingTransition(R.anim.scale_translate,
+					R.anim.my_alpha_action);
+			break;
+		case 5:
+			overridePendingTransition(R.anim.hyperspace_in,
+					R.anim.hyperspace_out);
+			break;
+		case 6:
+			overridePendingTransition(R.anim.push_left_in,
+					R.anim.push_left_out);
+			break;
+		case 7:
+			overridePendingTransition(R.anim.push_up_in,
+					R.anim.push_up_out);
+			break;
+		case 8:
+			overridePendingTransition(R.anim.slide_left,
+					R.anim.slide_right);
+			break;
+		case 9:
+			overridePendingTransition(R.anim.wave_scale,
+					R.anim.my_alpha_action);
+			break;
+		case 10:
+			overridePendingTransition(R.anim.zoom_enter,
+					R.anim.zoom_exit);
+			break;
+		case 11:
+			overridePendingTransition(R.anim.slide_up_in,
+					R.anim.slide_down_out);
+			break;
+		}
 	}
 }

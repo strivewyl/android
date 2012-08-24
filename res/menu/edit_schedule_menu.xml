@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- custom -->
+	
+	<item android:id="@+id/clear" android:showAsAction="ifRoom"
+		android:title="@string/clear" android:icon="@drawable/clear"/>
+	<item android:id="@+id/edit_main_help" android:showAsAction="ifRoom"
+		android:title="@string/ca_help" android:icon="@drawable/help" />
+</menu>

@@ -7,4 +7,4 @@
  * 持久化层，包括所有的数据存取操作。
  *
  */
-package com.ly.university.assistant.persistence;
+package com.ly.university.assistant.util;

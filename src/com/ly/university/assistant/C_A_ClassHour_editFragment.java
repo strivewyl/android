@@ -1,6 +1,9 @@
 package com.ly.university.assistant;
 
-import com.ly.university.assistant.persistence.DatabaseHelper;
+import java.util.ArrayList;
+import com.ly.university.assistant.C_A_ClassHourEditActivity.AddClearListener;
+import com.ly.university.assistant.util.DatabaseHelper;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -20,8 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class C_A_ClassHour_editFragment extends Fragment implements
-		OnClickListener {
+		OnClickListener , AddClearListener{
 
+	ArrayList<String> hour_names;
 	String updateName=null;
 	View editButton=null; //如果是空,则表示没有编辑项.
 	ScrollListener sl;
@@ -42,6 +46,7 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 	public void onCreate(Bundle savedstateBundle) {
 		super.onCreate(savedstateBundle);
 		// 初始化对象，从数据库中取出数据
+		hour_names = new ArrayList<String>();
 		db = new DatabaseHelper(getActivity()).getWritableDatabase();
 		c = db.rawQuery(
 				"SELECT ID AS _id , CLASSNAME, BEGIN, END FROM TIME ORDER BY BEGIN",
@@ -54,17 +59,16 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 		lf = inflater;
 		View view = lf.inflate(R.layout.ca_classhour_edit, container, false);
 		root = (ViewGroup) view.findViewById(R.id.classhour_edite_root);
-		ImageButton add = (ImageButton) view
-				.findViewById(R.id.btn_classhour_add);
-		add.setOnClickListener(this);
+		
 		// 加载数据库中信息
 		// 循环加载数据
 		if(c.getCount()>0){
 			do {
 				c.moveToNext();
 				View v = lf.inflate(R.layout.classhour_display_item, root, false);
-				((TextView) v.findViewById(R.id.class_hour_name)).setText(c
-						.getString(1));
+				String name =c.getString(1);
+				hour_names.add(name);
+				((TextView) v.findViewById(R.id.class_hour_name)).setText(name);
 				((TextView) v.findViewById(R.id.start_time))
 						.setText(c.getString(2));
 				((TextView) v.findViewById(R.id.end_time)).setText(c.getString(3));
@@ -80,6 +84,7 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 	public void onAttach(Activity a){
 		super.onAttach(a);
 		sl = (ScrollListener)a;
+		((C_A_ClassHourEditActivity) a).listener =this;
 	}
 
 	/**
@@ -87,10 +92,10 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 	 */
 	@Override
 	public void onClick(View v) {
-		if(v.getId()!=R.id.classhour_edit_item_save&&editButton!=null)
+		if(v.getId()!=R.id.classhour_edit_item_save && editButton!=null)
 			//添加代码,提示用户还有一项未编辑结束,需要保存后离开.
 		{
-			alertDialog(v);
+			alertDialog();
 			return;
 		}
 		View item = null;// 添加的view
@@ -98,19 +103,6 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 		ViewGroup vg = null;
 		String name, begin, end;
 		switch (v.getId()) {
-		case R.id.btn_classhour_add:
-			Log.v(TAG, "添加课时");
-			item = lf.inflate(R.layout.classhour_edit_item, null);
-			root.addView(item,1);
-			editButton=((ImageButton) item.findViewById(R.id.classhour_edit_item_save));
-			editButton.setOnClickListener(this);
-			//添加代码,让滚动条滚动到活动位置
-			int[] location = new int[2];
-			root.getChildAt(root.getChildCount()-1).getLocationInWindow(location);
-//			int y = location[1];
-//			Log.v("位置", "位置为: "+location[0]+","+y+","+root.getChildCount());
-			//sl.scroll(y);
-			break;
 		case R.id.btn_classhour_delete:
 			final View fv = v;
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -141,29 +133,46 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 			// 更改本行为修改后的状态。
 			vg = (ViewGroup) v.getParent();
 			index = root.indexOfChild(vg);
-			name = ((EditText) vg.getChildAt(0)).getText().toString();
-			String begin_hour = ((EditText) vg.getChildAt(1)).getText()
-					.toString();
-			String begin_minute = ((EditText) vg.getChildAt(3)).getText()
-					.toString();
-			String end_hour = ((EditText) vg.getChildAt(4)).getText()
-					.toString();
-			String end_minute = ((EditText) vg.getChildAt(6)).getText()
-					.toString();
-			// 添加代码，验证输入
-			String [] times = getTime(begin_hour, begin_minute, end_hour, end_minute);
-			if (name != null && !name.equals("") && times!=null)
-			{
-				begin=times[0];
-				end = times[1];
-			}
-			else 
-			{
-				Toast.makeText(getActivity(), "请检查输入信息! 请注意:时间格式为24小时  ", Toast.LENGTH_LONG).show();
-				editButton=vg.getChildAt(7);
+			name = ((EditText) vg.getChildAt(0)).getText().toString().trim()+"";
+			if(name.equals("")){
+				Toast.makeText(getActivity(), "请输入课时名!",  Toast.LENGTH_LONG).show();
 				return;
-			}		
-
+			}
+			if( updateName != null && !updateName.equals(name) && hour_names.contains(name)) {
+				Toast.makeText(getActivity(), "\""+name+"\""+"已经存在!",  Toast.LENGTH_LONG).show();
+				return;
+			}
+//			String begin_hour = ((EditText) vg.getChildAt(1)).getText()
+//					.toString();
+//			String begin_minute = ((EditText) vg.getChildAt(3)).getText()
+//					.toString();
+//			String end_hour = ((EditText) vg.getChildAt(4)).getText()
+//					.toString();
+//			String end_minute = ((EditText) vg.getChildAt(6)).getText()
+//					.toString();
+//			// 添加代码，验证输入
+//			String [] times = getTime(begin_hour, begin_minute, end_hour, end_minute);
+//			if (name != null && !name.equals("") && times!=null)
+//			{
+//				begin=times[0];
+//				end = times[1];
+//			}
+//			else 
+//			{
+//				Toast.makeText(getActivity(), "请检查输入信息! 请注意:时间格式为24小时  ", Toast.LENGTH_LONG).show();
+//				editButton=vg.getChildAt(7);
+//				return;
+//			}	
+			 begin =((TimePickerTextView)vg.getChildAt(1)).getText().toString();
+			 end =((TimePickerTextView)vg.getChildAt(2)).getText().toString();
+			 if(begin.compareTo(end) >=0) 
+			 {
+					Toast.makeText(getActivity(), "下课时间必须在上课时间之后", Toast.LENGTH_LONG).show();
+					editButton=vg.getChildAt(7);
+					return;
+				}	
+			 //输入控制结束.
+			 
 			// 添加代码，插入数据库
 			if(updateName!=null){
 				if(!updateName.equals(name)){
@@ -195,6 +204,8 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 									((ImageButton) item.findViewById(R.id.btn_classhour_edit))
 											.setOnClickListener(C_A_ClassHour_editFragment.this);
 									root.addView(item, index1);
+									hour_names.remove(updateName);
+									hour_names.add(name1);
 					           }
 					       })
 					       .setNeutralButton("更改", new DialogInterface.OnClickListener() {
@@ -218,6 +229,8 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 									((ImageButton) item.findViewById(R.id.btn_classhour_edit))
 											.setOnClickListener(C_A_ClassHour_editFragment.this);
 									root.addView(item, index1);
+									hour_names.remove(updateName);
+									hour_names.add(name1);
 					                return;
 					           }
 					       }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -295,14 +308,8 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 			root.removeViewAt(index);
 			((EditText) item.findViewById(R.id.classhour_edit_item_name))
 					.setText(name);
-			((EditText) item.findViewById(R.id.classhour_edit_item_beginhour))
-					.setText(begin.split(":")[0]);
-			((EditText) item.findViewById(R.id.classhour_edit_item_beginminute))
-					.setText(begin.split(":")[1]);
-			((EditText) item.findViewById(R.id.classhour_edit_item_endhour))
-					.setText(end.split(":")[0]);
-			((EditText) item.findViewById(R.id.classhour_edit_item_endminute))
-					.setText(end.split(":")[1]);
+		   ((TimePickerTextView) item.findViewById(R.id.begin)).setActivity(getActivity()).setText(begin);
+		   ((TimePickerTextView) item.findViewById(R.id.end)).setActivity(getActivity()).setText(end);
 			editButton=((ImageButton) item.findViewById(R.id.classhour_edit_item_save));
 		    editButton.setOnClickListener(this);
 			root.addView(item, index);
@@ -317,7 +324,7 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 		if (db.isOpen()) db.close();
 	}
 
-	private void alertDialog(View v){
+	private void alertDialog(){
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage("您有一项编辑未完成,是否保存后退出?")
@@ -336,31 +343,61 @@ public class C_A_ClassHour_editFragment extends Fragment implements
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
-	/**
-	 * 
-	 * @param begin_hour  开始小时字符串
-	 * @param begin_minute  开始分钟字符串
-	 * @param end_hour  结束小时字符串
-	 * @param end_minute 结束分钟字符串
-	 * @return 如果符合开始时间小于结束时间,返回两个时间字符串  格式为   05:05   **:**
-	 * 若不符合,返回null
-	 */
-	String[] getTime(String begin_hour,String begin_minute,String end_hour,String end_minute){
-		int bh,bm,eh,em;
-		try{
-			bh = Integer.parseInt(begin_hour);
-			bm = Integer.parseInt(begin_minute);
-			eh = Integer.parseInt(end_hour);
-			em = Integer.parseInt(end_minute);
-			if(bh<0 || bh>23 || eh<0 || eh>23 || em<0 ||em>59 || bm<0 || bm>59) return null;
-			if(bh*60+bm > eh*60+em) return null;
-			return new String[]{( bh<10 && begin_hour.charAt(0)!='0' ? ""+0+begin_hour : begin_hour ) +":"
-					+ ((bm<10 && begin_minute.charAt(0)!='0')? ""+0+begin_minute : begin_minute) 
-					, ( eh<10 && end_hour.charAt(0)!='0' ? ""+0+end_hour : end_hour )+":"
-					+(( em<10 && end_minute.charAt(0)!='0') ? ""+0+end_minute : end_minute) };
-		}catch(Exception e){
-			Log.v("格式错误","格式错误");
-			return null;
+//	/**
+//	 * 
+//	 * @param begin_hour  开始小时字符串
+//	 * @param begin_minute  开始分钟字符串
+//	 * @param end_hour  结束小时字符串
+//	 * @param end_minute 结束分钟字符串
+//	 * @return 如果符合开始时间小于结束时间,返回两个时间字符串  格式为   05:05   **:**
+//	 * 若不符合,返回null
+//	 */
+//	String[] getTime(String begin_hour,String begin_minute,String end_hour,String end_minute){
+//		int bh,bm,eh,em;
+//		try{
+//			bh = Integer.parseInt(begin_hour);
+//			bm = Integer.parseInt(begin_minute);
+//			eh = Integer.parseInt(end_hour);
+//			em = Integer.parseInt(end_minute);
+//			if(bh<0 || bh>23 || eh<0 || eh>23 || em<0 ||em>59 || bm<0 || bm>59) return null;
+//			if(bh*60+bm >= eh*60+em) return null;
+//			return new String[]{ bh<10 && begin_hour.length()==1 ? ""+0+begin_hour : begin_hour  +":"
+//					+ ((bm<10 && begin_minute.length()==1)? ""+0+begin_minute : begin_minute) 
+//					, ( eh<10 && end_hour.length()==1 ? ""+0+end_hour : end_hour )+":"
+//					+(( em<10 && end_minute.length()==1 ) ? ""+0+end_minute : end_minute) };
+//		}catch(Exception e){
+//			Log.v("格式错误","格式错误");
+//			return null;
+//		}
+//	}
+
+	@Override
+	public void add() {
+		// TODO Auto-generated method stub
+		Log.v(TAG, "添加课时");
+		if(editButton!=null)
+			//添加代码,提示用户还有一项未编辑结束,需要保存后离开.
+		{
+			alertDialog();
+			return;
 		}
+		View item = lf.inflate(R.layout.classhour_edit_item, null);
+		root.addView(item,1);
+		((TimePickerTextView) item.findViewById(R.id.begin)).setActivity(getActivity()).setText("点击输入");
+		((TimePickerTextView) item.findViewById(R.id.end)).setActivity(getActivity()).setText("点击输入");
+		editButton=((ImageButton) item.findViewById(R.id.classhour_edit_item_save));
+		editButton.setOnClickListener(this);
+		//添加代码,让滚动条滚动到活动位置
+//		int[] location = new int[2];
+//		root.getChildAt(root.getChildCount()-1).getLocationInWindow(location);
+//		int y = location[1];
+//		Log.v("位置", "位置为: "+location[0]+","+y+","+root.getChildCount());
+		//sl.scroll(y);
+	}
+	public void clear(){
+		root.removeAllViews();
+		db.delete("TIME", null, null);
+		db.delete("SCHEDULE", null, null);
+		db.close();
 	}
 }

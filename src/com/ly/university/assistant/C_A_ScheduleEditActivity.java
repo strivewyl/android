@@ -1,8 +1,14 @@
 package com.ly.university.assistant;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectResource;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -12,6 +18,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import com.ly.university.assistant.businesslogic.C_A_TimingService;
+import com.ly.university.assistant.util.DatabaseHelper;
 /**
  * 
  *   编辑页面
@@ -21,7 +28,13 @@ import com.ly.university.assistant.businesslogic.C_A_TimingService;
  **/
 @ContentView(R.layout.edit_main_schedule)
 public class C_A_ScheduleEditActivity extends RoboSherlockFragmentActivity{
-	
+	public static interface ClearListener{
+		void clear();
+	}
+	ArrayList< ClearListener> clearListeners ;
+	public void setOnClearListener(ClearListener c){
+		clearListeners.add(c);
+	}
 	public static final String TAG="课程安排表编辑页面";
 	ActionBar ab;
 	@InjectResource(R.string.toast_landscape)String toast;
@@ -29,6 +42,7 @@ public class C_A_ScheduleEditActivity extends RoboSherlockFragmentActivity{
 	public void onCreate(Bundle savedstateBundle){
 		super.onCreate(savedstateBundle);
 
+		clearListeners= new ArrayList<C_A_ScheduleEditActivity.ClearListener>();
 //		if (this.getResources().getConfiguration().orientation ==Configuration.ORIENTATION_PORTRAIT){
 //			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 //			Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
@@ -60,15 +74,7 @@ public class C_A_ScheduleEditActivity extends RoboSherlockFragmentActivity{
 							Intent intent = new Intent(C_A_ScheduleEditActivity.this,C_A_ClassHourEditActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 							startActivity(intent);
-							break;
-						case 1:
-							Log.v(TAG, "课程安排编辑");
-							// 添加代码：判断如果存在没有保存的项，则提示用户是否保存后离开		
-							
-//							ft.replace(R.id.edit_main_root, schedule );
-//							ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//							ft.commit();
-							
+							randomAnim();
 							break;
 						}
 						return true;
@@ -78,22 +84,50 @@ public class C_A_ScheduleEditActivity extends RoboSherlockFragmentActivity{
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.edit_main_menu, menu);
+		getSupportMenuInflater().inflate(R.menu.edit_schedule_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getItemId()==android.R.id.home){
-			 Intent parentActivityIntent = new Intent(this, C_A_MainActivity.class);
-	            parentActivityIntent.addFlags(
-	                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
-	                    Intent.FLAG_ACTIVITY_NEW_TASK);
-	            startActivity(parentActivityIntent);
-	            finish();
-		}
-		else {
-			Log.v("help","C_A_Edit_help");
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			Intent parentActivityIntent = new Intent(this, C_A_MainActivity.class);
+            parentActivityIntent.addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(parentActivityIntent);
+            finish();
+			break;
+		case R.id.clear:
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("清空课程安排表?")
+			       .setCancelable(false)
+			       .setTitle("严重警告")
+			       .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   for(ClearListener c : clearListeners){
+			        		   c.clear();
+			        	   }
+		            	SQLiteDatabase db = new DatabaseHelper(C_A_ScheduleEditActivity.this).getWritableDatabase();
+		            	db.delete("SCHEDULE", null, null);
+			        	db.close(); 
+			           }
+			       })
+			       .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			                dialog.cancel();
+			           }
+			       });
+			AlertDialog alert = builder.create();
+			alert.setOwnerActivity(this);
+			alert.show();
+			break;
+		case R.id.edit_main_help:
+			startActivity(new Intent(this, C_A_ScheduleHelpActivity.class));
+		    randomAnim();
+			
+			break;
 		}
 		return true;
 	}
@@ -115,5 +149,65 @@ public class C_A_ScheduleEditActivity extends RoboSherlockFragmentActivity{
 	public void onDestroy(){
 		super.onDestroy();
 		startService(new Intent(this, C_A_TimingService.class));
+	}
+	@Override
+	public void finish(){
+		super.finish();
+		randomAnim();
+	}
+	
+	void randomAnim(){
+		Random random = new Random();
+		int i = random.nextInt(12);
+		Log.v("动画师", ""+i);
+		switch (i) {
+		case 0:
+			overridePendingTransition(R.anim.fade, R.anim.hold);
+			break;
+		case 1:
+			overridePendingTransition(R.anim.my_scale_action,
+					R.anim.my_alpha_action);
+			break;
+		case 2:
+			overridePendingTransition(R.anim.scale_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 3:
+			overridePendingTransition(R.anim.scale_translate_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 4:
+			overridePendingTransition(R.anim.scale_translate,
+					R.anim.my_alpha_action);
+			break;
+		case 5:
+			overridePendingTransition(R.anim.hyperspace_in,
+					R.anim.hyperspace_out);
+			break;
+		case 6:
+			overridePendingTransition(R.anim.push_left_in,
+					R.anim.push_left_out);
+			break;
+		case 7:
+			overridePendingTransition(R.anim.push_up_in,
+					R.anim.push_up_out);
+			break;
+		case 8:
+			overridePendingTransition(R.anim.slide_left,
+					R.anim.slide_right);
+			break;
+		case 9:
+			overridePendingTransition(R.anim.wave_scale,
+					R.anim.my_alpha_action);
+			break;
+		case 10:
+			overridePendingTransition(R.anim.zoom_enter,
+					R.anim.zoom_exit);
+			break;
+		case 11:
+			overridePendingTransition(R.anim.slide_up_in,
+					R.anim.slide_down_out);
+			break;
+		}
 	}
 }

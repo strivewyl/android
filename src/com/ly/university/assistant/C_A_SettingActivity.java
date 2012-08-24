@@ -1,5 +1,8 @@
 package com.ly.university.assistant;
 
+import java.util.Random;
+
+import com.ly.university.assistant.businesslogic.C_A_ClassModeBroadcastReceiver;
 import com.ly.university.assistant.businesslogic.C_A_TimingService;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -113,7 +116,76 @@ public class C_A_SettingActivity extends PreferenceActivity implements OnPrefere
     			return false;
     		}
     	}
+    	
+    	//关闭琐机
+    	if(preference == class_lock_setting && !(Boolean)newValue){
+    		Intent intent = new Intent(this, C_A_ClassModeBroadcastReceiver.class);
+    		intent.putExtra("classend", true);
+    		intent.putExtra(C_A_SettingActivity.CLASS_LOCK_SETTING,
+					true);
+    		this.sendBroadcast(intent);
+    	}
     	startService(new Intent(this, C_A_TimingService.class));
     	return true;
     }
+	@Override
+	public void finish(){
+		super.finish();
+		randomAnim();
+	}
+	
+	void randomAnim(){
+		Random random = new Random();
+		int i = random.nextInt(12);
+		Log.v("动画师", ""+i);
+		switch (i) {
+		case 0:
+			overridePendingTransition(R.anim.fade, R.anim.hold);
+			break;
+		case 1:
+			overridePendingTransition(R.anim.my_scale_action,
+					R.anim.my_alpha_action);
+			break;
+		case 2:
+			overridePendingTransition(R.anim.scale_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 3:
+			overridePendingTransition(R.anim.scale_translate_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 4:
+			overridePendingTransition(R.anim.scale_translate,
+					R.anim.my_alpha_action);
+			break;
+		case 5:
+			overridePendingTransition(R.anim.hyperspace_in,
+					R.anim.hyperspace_out);
+			break;
+		case 6:
+			overridePendingTransition(R.anim.push_left_in,
+					R.anim.push_left_out);
+			break;
+		case 7:
+			overridePendingTransition(R.anim.push_up_in,
+					R.anim.push_up_out);
+			break;
+		case 8:
+			overridePendingTransition(R.anim.slide_left,
+					R.anim.slide_right);
+			break;
+		case 9:
+			overridePendingTransition(R.anim.wave_scale,
+					R.anim.my_alpha_action);
+			break;
+		case 10:
+			overridePendingTransition(R.anim.zoom_enter,
+					R.anim.zoom_exit);
+			break;
+		case 11:
+			overridePendingTransition(R.anim.slide_up_in,
+					R.anim.slide_down_out);
+			break;
+		}
+	}
 }

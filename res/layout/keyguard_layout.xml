@@ -1,113 +1,117 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/back" >
-    
-    <TextView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sim"
-        android:layout_marginTop="13dp"
-        android:layout_marginLeft="5dp"
-        android:textColor="#f6f5ec"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        />
-    
-     <view
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        class="com.ly.university.assistant.businesslogic.TimeWidget"
-        android:textColor="#afdfe4"
-        android:textSize="45sp" 
-        android:id="@+id/time"
-         android:layout_marginLeft="5dp"/>
-     
-     <TextView 
-         android:id="@+id/date"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:textColor="#afdfe4"
-          android:layout_marginLeft="5dp"
-        android:textSize="14sp"/>
-     
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:singleLine="true"
-        android:text="@string/keyguard_line1"
-        android:textColor="#b2d235"
-        android:textSize="20sp"
-        android:textStyle="italic"/>
+    android:layout_height="fill_parent" 
+    android:background="@drawable/back">
 
-    <TextView
-        android:id="@+id/line1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|left"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
-        android:singleLine="true"
-        android:text="@string/keyguard_line2"
-        android:textColor="#d71345"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/line2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right"
-        android:layout_marginRight="15dp"
-        android:singleLine="true"
-        android:text="@string/keyguard_line3"
-        android:textColor="#d71345"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/sim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="13dp"
+            android:textColor="#f6f5ec"
+            android:textSize="35sp"
+            android:textStyle="bold" />
 
-    
+        <view
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            class="com.ly.university.assistant.businesslogic.TimeWidget"
+            android:textColor="#afdfe4"
+            android:textSize="45sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="10dp"
-        android:singleLine="true"
-        android:text="@string/keyguard_line4"
-        android:textColor="#fffffb"
-        android:textSize="16sp"
-        android:textStyle="italic" />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="#afdfe4"
+            android:textSize="14sp" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginTop="8dp"
-        android:background="#c0ffffff"
-        android:hint="@string/password"
-        android:minWidth="200dp"
-        android:singleLine="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:text="@string/keyguard_line1"
+            android:textColor="#b2d235"
+            android:textSize="20sp"
+            android:textStyle="italic" />
 
-    <ImageButton
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginTop="5dp"
-        android:background="#00000000"
-        android:contentDescription="@string/unlock"
-        android:src="@drawable/unlock" />
-    <TextView 
-        android:id="@+id/click_unlock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#fffffb"
-        android:textSize="18sp"
-        android:text="@string/click_unlock"/>
+        <TextView
+            android:id="@+id/line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:singleLine="true"
+            android:text="@string/keyguard_line2"
+            android:textColor="#d71345"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="15dp"
+            android:singleLine="true"
+            android:text="@string/keyguard_line3"
+            android:textColor="#d71345"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:text="@string/keyguard_line4"
+            android:textColor="#fffffb"
+            android:textSize="16sp"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="8dp"
+            android:background="#c0ffffff"
+            android:hint="@string/password"
+            android:minWidth="200dp"
+            android:singleLine="true" />
+
+        <ImageButton
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="5dp"
+            android:background="#00000000"
+            android:contentDescription="@string/unlock"
+            android:src="@drawable/unlock" />
+
+        <TextView
+            android:id="@+id/click_unlock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/click_unlock"
+            android:textColor="#fffffb"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</ScrollView>

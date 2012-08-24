@@ -3,7 +3,7 @@
     android:id="@+id/classhour_edite_root"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -19,7 +19,9 @@
             android:ellipsize="end"
             android:gravity="center"
             android:singleLine="true"
-            android:text="@string/class_hour_name" />
+            android:text="@string/class_hour_name" 
+            android:textSize="18sp"
+                android:padding="3dp"/>
 
         <TextView
             android:layout_width="0dp"
@@ -29,7 +31,9 @@
             android:ellipsize="end"
             android:gravity="center"
             android:singleLine="true"
-            android:text="@string/start_time" />
+            android:text="@string/start_time"
+            android:textSize="18sp"
+                android:padding="3dp" />
 
         <TextView
             android:layout_width="0dp"
@@ -38,16 +42,20 @@
             android:background="@drawable/textview_bottom"
             android:ellipsize="end"
             android:gravity="center"
+            android:textSize="18sp"
+                android:padding="3dp"
             android:singleLine="true"
             android:text="@string/end_time" />
 
-        <ImageButton
-            android:id="@+id/btn_classhour_add"
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/add_classhour"
-            android:src="@drawable/add" />
+            android:text="@string/manipulate"
+            android:gravity="center"
+            android:textSize="18sp"
+                android:padding="3dp"
+                android:singleLine="true"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/root"
+  >
+
+    <com.ly.university.assistant.FunctionGuideScrollLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible" >
+
+        <ImageView android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/fg_bg1" 
+                 android:scaleType="fitXY"/>
+        
+        <ImageView android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/fg_bg2_1"
+                 android:scaleType="fitXY" />
+        
+        <ImageView android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/fg_bg3_1" 
+                 android:scaleType="fitXY"/>
+        
+        <ImageView android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/fg_bg4_2" 
+                 android:scaleType="fitXY"/>
+       
+        <ImageView android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/fg_bg5_1"
+                 android:scaleType="fitXY" />
+          
+        <ImageView android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/fg_bg6"
+                 android:scaleType="fitXY" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/whatsnew_bg" >
+
+            <Button
+                android:id="@+id/startBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="98dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/button_bg"
+                android:text="@string/start"
+                android:textColor="@color/TextColor"
+                android:textSize="18sp" />
+        </RelativeLayout>
+        
+    </com.ly.university.assistant.FunctionGuideScrollLayout>
+  
+    <!-- 页面下面的原点,表示当前页面向导   -->
+    <LinearLayout
+        android:id="@+id/llayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24.0dip"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="5.0dip"
+            android:src="@drawable/page_indicator_bg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="5.0dip"
+            android:src="@drawable/page_indicator_bg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="5.0dip"
+            android:src="@drawable/page_indicator_bg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="5.0dip"
+            android:src="@drawable/page_indicator_bg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="5.0dip"
+            android:src="@drawable/page_indicator_bg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="5.0dip"
+            android:src="@drawable/page_indicator_bg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:padding="5.0dip"
+            android:src="@drawable/page_indicator_bg" />
+
+      
+    </LinearLayout>
+
+    <!-- 点击按钮后,替代上面素有的内容显示一个打开大门的图案 -->
+       <LinearLayout
+        android:id="@+id/animLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone" >
+
+      <LinearLayout
+            android:id="@+id/leftLayout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:scaleType="fitXY"
+                 android:layout_width="0dp"
+            android:layout_weight="4"
+                android:layout_height="fill_parent"
+                android:src="@drawable/whatsnew_left" />
+
+            <ImageView
+                android:layout_width="0dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+                android:layout_height="fill_parent"
+                android:src="@drawable/whatsnew_left_m" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rightLayout"
+             android:layout_width="0dp"
+            android:layout_weight="1"
+                        android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="0dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+                android:layout_height="fill_parent"
+                android:src="@drawable/whatsnew_right_m" />
+
+            <ImageView
+                 android:layout_width="0dp"
+            android:layout_weight="4"
+             android:scaleType="fitXY"
+                android:layout_height="fill_parent"
+                android:src="@drawable/whatsnew_right" 
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

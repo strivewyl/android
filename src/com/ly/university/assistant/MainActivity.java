@@ -3,7 +3,6 @@ package com.ly.university.assistant;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
@@ -20,8 +19,10 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 
@@ -46,11 +47,12 @@ public class MainActivity extends RoboSherlockActivity implements
 	@InjectView(R.id.ibtn1)
 	ImageButton ibtn1;
 	@InjectView(R.id.ibtn2)
-	ImageButton ibtn2;
+	ImageButton  ibtn2;
 	@InjectView(R.id.ibtn3)
-	ImageButton ibtn3;
+	ImageButton  ibtn3;
 	@InjectView(R.id.ibtn4)
-	ImageButton ibtn4;
+	ImageButton  ibtn4;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,7 @@ public class MainActivity extends RoboSherlockActivity implements
 		ibtn2.setOnClickListener(this);
 		ibtn3.setOnClickListener(this);
 		ibtn4.setOnClickListener(this);
-
+		
 		// 让TextView获得焦点，开始滚动
 		tv.setFocusable(true);
 		tv.setFocusableInTouchMode(true);
@@ -98,6 +100,7 @@ public class MainActivity extends RoboSherlockActivity implements
 							// 添加代码：
 							startActivity(new Intent(MainActivity.this,
 									C_A_MainActivity.class));
+							randomAnim();
 							break;
 						case 2:
 							Log.v(TAG, "励志");
@@ -119,17 +122,7 @@ public class MainActivity extends RoboSherlockActivity implements
 					}
 				});
 
-		// 如果是首次运行程序，曾打开向导。
-		SharedPreferences sp = getPreferences(Activity. MODE_PRIVATE);
-		if (sp == null || sp.getBoolean(IS_FIRSTIME_OPEN, false)) {
-			Log.v(TAG, "第一次打开程序。");
-			// 添加代码,  转向功能介绍：
-			
-			//设置为非第一次打开程序
-			SharedPreferences.Editor editer = sp.edit();
-			editer.putBoolean(IS_FIRSTIME_OPEN, true);
-			editer.commit();
-		}
+
 		// 动画实现,四个button
 		final Animation anim = AnimationUtils.loadAnimation(this,
 				R.anim.mainactivity);
@@ -157,26 +150,36 @@ public class MainActivity extends RoboSherlockActivity implements
 	}// onCreate()结束
 
 	@Override
-	public void onClick(View v) {
-		//
-		switch (v.getId()) {
-		case R.id.ibtn1:
-			Log.v(TAG, "转向上课助手");
-			startActivity(new Intent(MainActivity.this, C_A_MainActivity.class));
-			break;
-		case R.id.ibtn2:
-			Log.v(TAG, "转向励志");
-
-			break;
-		case R.id.ibtn3:
-			Log.v(TAG, "转向健康助手");
-
-			break;
-		case R.id.ibtn4:
-			Log.v(TAG, "转向冷暖预知");
-
-			break;
-		}
+	public void onClick(View view) {
+		final View v = view;
+		ScaleAnimation anim = new ScaleAnimation(1.0f, 0.0f, 1.0f, 0.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		anim.setDuration(1000);
+		((ViewGroup)v.getParent()).startAnimation(anim);
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				switch (v.getId()) {
+				case R.id.ibtn1:
+					Log.v(TAG, "转向上课助手");
+					startActivity(new Intent(MainActivity.this, C_A_MainActivity.class));
+					randomAnim();
+					break;
+				case R.id.ibtn2:
+					Log.v(TAG, "转向励志");
+					
+					break;
+				case R.id.ibtn3:
+					Log.v(TAG, "转向健康助手");
+				
+					break;
+				case R.id.ibtn4:
+					Log.v(TAG, "转向冷暖预知");
+					break;
+				}
+			}
+		}, 750);
 	}	
 	@Override
 	public void onResume() {
@@ -191,6 +194,17 @@ public class MainActivity extends RoboSherlockActivity implements
 				handler.sendMessage(msg);
 			}
 		}, 100,3000);
+		SharedPreferences sp = getPreferences(Activity. MODE_PRIVATE);
+		if (! sp.getBoolean(IS_FIRSTIME_OPEN, false)) {
+			Log.v(TAG, "第一次打开程序。");
+			// 添加代码,  转向功能介绍：
+			startActivity(new Intent(this, FunctionGuideActivity.class));
+			randomAnim();
+			//设置为非第一次打开程序
+			SharedPreferences.Editor editer = sp.edit();
+			editer.putBoolean(IS_FIRSTIME_OPEN, true);
+			editer.commit();
+		}
 	}
 
 	@Override
@@ -212,13 +226,15 @@ public class MainActivity extends RoboSherlockActivity implements
 		case R.id.function_guide:
 			Log.v(TAG, "功能向导");
 			// 添加代码
-
+			startActivity(new Intent(this, FunctionGuideActivity.class));
+			randomAnim();
 			break;
 
 		case R.id.contact_us:
 			Log.v(TAG, "联系我们");
 			// 添加代码
-
+			startActivity(new Intent(MainActivity.this, ContactActivity.class));
+			randomAnim();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -227,5 +243,67 @@ public class MainActivity extends RoboSherlockActivity implements
 	public void onStart(){
 		super.onStart();
 		ab.setSelectedNavigationItem(0);
+		// 如果是首次运行程序，打开向导。
+	}
+	
+	@Override
+	public void finish(){
+		super.finish();
+		randomAnim();
+	}
+	
+	void randomAnim(){
+		Random random = new Random();
+		int i = random.nextInt(12);
+		Log.v("动画师", ""+i);
+		switch (i) {
+		case 0:
+			overridePendingTransition(R.anim.fade, R.anim.hold);
+			break;
+		case 1:
+			overridePendingTransition(R.anim.my_scale_action,
+					R.anim.my_alpha_action);
+			break;
+		case 2:
+			overridePendingTransition(R.anim.scale_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 3:
+			overridePendingTransition(R.anim.scale_translate_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 4:
+			overridePendingTransition(R.anim.scale_translate,
+					R.anim.my_alpha_action);
+			break;
+		case 5:
+			overridePendingTransition(R.anim.hyperspace_in,
+					R.anim.hyperspace_out);
+			break;
+		case 6:
+			overridePendingTransition(R.anim.push_left_in,
+					R.anim.push_left_out);
+			break;
+		case 7:
+			overridePendingTransition(R.anim.push_up_in,
+					R.anim.push_up_out);
+			break;
+		case 8:
+			overridePendingTransition(R.anim.slide_left,
+					R.anim.slide_right);
+			break;
+		case 9:
+			overridePendingTransition(R.anim.wave_scale,
+					R.anim.my_alpha_action);
+			break;
+		case 10:
+			overridePendingTransition(R.anim.zoom_enter,
+					R.anim.zoom_exit);
+			break;
+		case 11:
+			overridePendingTransition(R.anim.slide_up_in,
+					R.anim.slide_down_out);
+			break;
+		}
 	}
 }

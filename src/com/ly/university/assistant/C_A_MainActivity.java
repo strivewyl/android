@@ -1,6 +1,8 @@
 package com.ly.university.assistant;
 
 import java.util.Calendar;
+import java.util.Random;
+
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import android.annotation.SuppressLint;
@@ -123,17 +125,20 @@ public class C_A_MainActivity extends RoboSherlockFragmentActivity implements
 			Log.v(TAG, "编辑");
 			// 添加代码
 			startActivity(new Intent(this, C_A_ClassHourEditActivity.class));
+			randomAnim();
 			break;
 
 		case R.id.ca_help:
 			Log.v(TAG, "帮助");
 			// 添加代码
-
+			startActivity(new Intent(this, C_A_HelpActivity.class));
+			randomAnim();
 			break;
 		case R.id.ca_setting:
 			Log.v(TAG, "设置");
 			// 添加代码
 			startActivity(new Intent(this, C_A_SettingActivity.class));
+			randomAnim();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -176,6 +181,66 @@ public class C_A_MainActivity extends RoboSherlockFragmentActivity implements
 		@Override
 		public CharSequence getPageTitle(int position) {
 			return "星期：" + (position + 1);
+		}
+	}
+	@Override
+	public void finish(){
+		super.finish();
+		randomAnim();
+	}
+	
+	void randomAnim(){
+		Random random = new Random();
+		int i = random.nextInt(12);
+		Log.v("动画师", ""+i);
+		switch (i) {
+		case 0:
+			overridePendingTransition(R.anim.fade, R.anim.hold);
+			break;
+		case 1:
+			overridePendingTransition(R.anim.my_scale_action,
+					R.anim.my_alpha_action);
+			break;
+		case 2:
+			overridePendingTransition(R.anim.scale_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 3:
+			overridePendingTransition(R.anim.scale_translate_rotate,
+					R.anim.my_alpha_action);
+			break;
+		case 4:
+			overridePendingTransition(R.anim.scale_translate,
+					R.anim.my_alpha_action);
+			break;
+		case 5:
+			overridePendingTransition(R.anim.hyperspace_in,
+					R.anim.hyperspace_out);
+			break;
+		case 6:
+			overridePendingTransition(R.anim.push_left_in,
+					R.anim.push_left_out);
+			break;
+		case 7:
+			overridePendingTransition(R.anim.push_up_in,
+					R.anim.push_up_out);
+			break;
+		case 8:
+			overridePendingTransition(R.anim.slide_left,
+					R.anim.slide_right);
+			break;
+		case 9:
+			overridePendingTransition(R.anim.wave_scale,
+					R.anim.my_alpha_action);
+			break;
+		case 10:
+			overridePendingTransition(R.anim.zoom_enter,
+					R.anim.zoom_exit);
+			break;
+		case 11:
+			overridePendingTransition(R.anim.slide_up_in,
+					R.anim.slide_down_out);
+			break;
 		}
 	}
 }

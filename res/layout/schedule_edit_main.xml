@@ -22,7 +22,9 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:singleLine="true" 
-                android:background="@drawable/textview_bottom"/>
+                android:background="@drawable/textview_bottom"
+                android:textSize="18sp"
+                android:padding="3dp"/>
 
             <TextView
                 android:text="@string/classname"
@@ -32,7 +34,9 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:singleLine="true"
-                 android:background="@drawable/textview_bottom" />
+                 android:background="@drawable/textview_bottom" 
+                 android:textSize="18sp"
+                android:padding="3dp"/>
 
             <TextView
                 android:text="@string/address"
@@ -42,7 +46,9 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:singleLine="true"
-                 android:background="@drawable/textview_bottom" />
+                 android:background="@drawable/textview_bottom"
+                 android:textSize="18sp"
+                android:padding="3dp" />
              <TextView
                 android:text="@string/manipulate"
                 android:gravity="center"
@@ -51,7 +57,9 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:singleLine="true" 
-                 android:background="#20000505"/>
+                android:textSize="18sp"
+                android:padding="3dp"
+                 />
             
             
         </LinearLayout>

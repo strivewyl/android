@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/classhour_edit_item_update"/>
-     <Button android:id="@+id/btn_clear"
+        <Button android:id="@+id/btn_clear"
             android:layout_width="0dp" 
             android:layout_height="wrap_content"
             android:layout_weight="0.5"

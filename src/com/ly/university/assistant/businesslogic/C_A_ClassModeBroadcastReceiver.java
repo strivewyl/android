@@ -3,7 +3,8 @@ package com.ly.university.assistant.businesslogic;
 import java.util.Calendar;
 
 import com.ly.university.assistant.C_A_SettingActivity;
-import com.ly.university.assistant.persistence.DatabaseHelper;
+import com.ly.university.assistant.util.DatabaseHelper;
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -29,10 +30,10 @@ import android.util.Log;
  * 
  */
 public class C_A_ClassModeBroadcastReceiver extends BroadcastReceiver {
+	
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-
 		AudioManager audio = (AudioManager) context
 				.getSystemService(Context.AUDIO_SERVICE);
 		ContentResolver cr = context.getContentResolver();
@@ -143,7 +144,6 @@ public class C_A_ClassModeBroadcastReceiver extends BroadcastReceiver {
 					editor.commit();
 					context.startService(new Intent(context,
 							C_A_LockService.class));
-					Log.v("上课琐机", "上课琐机");
 				}
 
 				Calendar classend = Calendar.getInstance();
@@ -234,4 +234,6 @@ public class C_A_ClassModeBroadcastReceiver extends BroadcastReceiver {
 		}
 
 	}
+	
+	
 }

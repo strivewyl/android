@@ -2,76 +2,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/mainbackgroud" 
-    android:gravity="center">
+    android:background="#d1c7b7" >
 
     <view
-        class="com.ly.university.assistant.AlwaysFocusedTextView"
         android:id="@+id/tv"
-        android:focusable="true"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        class="com.ly.university.assistant.AlwaysFocusedTextView"
+        android:background="@drawable/back5"
         android:ellipsize="marquee"
+        android:focusable="true"
         android:marqueeRepeatLimit="marquee_forever"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="12dp"
         android:singleLine="true"
         android:text="@string/maincontent"
         android:textColor="#11264f"
         android:textColorLink="@color/honeycombish_blue"
         android:textSize="27.5pt"
-        android:textStyle="bold|italic" 
-        android:layout_margin="10dp"
-        >
+        android:textStyle="bold|italic" >
     </view>
-    
 
-    <LinearLayout android:layout_weight="1"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        
-        <ImageButton android:layout_weight="1"
-            android:layout_height="fill_parent"
-            android:layout_width="wrap_content"
-            android:background="#00000000"
-            android:id="@+id/ibtn1"
-            android:src="@drawable/test"
-            android:contentDescription="@string/class_assistant"           
-            />
-        <ImageButton android:layout_weight="1"
-            android:layout_height="fill_parent"
-            android:layout_width="wrap_content"
-            android:background="#00000000"
-            android:id="@+id/ibtn2"
-            android:src="@drawable/test"
-            android:contentDescription="@string/positive"
-            />
-        
-    </LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:weightSum="2" >
 
-        <LinearLayout android:layout_weight="1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        
-       <ImageButton android:layout_weight="1"
-            android:layout_height="fill_parent"
-            android:layout_width="wrap_content"
-            android:background="#00000000"
-            android:id="@+id/ibtn3"
-            android:src="@drawable/test"
-            android:contentDescription="@string/health"
-            />
-       <ImageButton android:layout_weight="1"
-            android:layout_height="fill_parent"
-            android:layout_width="wrap_content"
-            android:background="#00000000"
-            android:id="@+id/ibtn4"
-            android:src="@drawable/test"
-            android:contentDescription="@string/weather_forecast"
-            />
-        
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+             >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center" 
+                android:background="@drawable/imagebuttonbg_default"
+                android:clickable="true"
+                 android:layout_margin="3dp">
+
+                <ImageButton
+                    android:id="@+id/ibtn1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:contentDescription="@string/class_assistant"
+                    android:src="@drawable/classassistant" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center" 
+                android:background="@drawable/imagebuttonbg_default"
+                android:clickable="true"
+                 android:layout_margin="3dp">
+
+                <ImageButton
+                    android:id="@+id/ibtn2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:contentDescription="@string/positive"
+                    android:src="@drawable/motivational" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" 
+                android:gravity="center"
+                android:background="@drawable/imagebuttonbg_default"
+                android:clickable="true"
+                android:layout_margin="3dp">
+
+                <ImageButton
+                    android:id="@+id/ibtn3"
+                    android:background="#00000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/health"
+                    android:src="@drawable/heath" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/imagebuttonbg_default" 
+                android:clickable="true"
+                 android:layout_margin="3dp"
+                >
+
+                <ImageButton
+                     android:id="@+id/ibtn4"
+                    android:background="#00000000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/weather_forecast"
+                    android:src="@drawable/weather_forecast" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-    
 
 </LinearLayout>

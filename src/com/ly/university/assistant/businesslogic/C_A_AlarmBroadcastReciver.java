@@ -2,7 +2,8 @@ package com.ly.university.assistant.businesslogic;
 
 import com.ly.university.assistant.C_A_SettingActivity;
 import com.ly.university.assistant.R;
-import com.ly.university.assistant.persistence.DatabaseHelper;
+import com.ly.university.assistant.util.DatabaseHelper;
+
 import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.NotificationManager;

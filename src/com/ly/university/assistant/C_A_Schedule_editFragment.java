@@ -1,7 +1,11 @@
 package com.ly.university.assistant;
 
 import java.util.ArrayList;
-import com.ly.university.assistant.persistence.DatabaseHelper;
+
+import com.ly.university.assistant.C_A_ScheduleEditActivity.ClearListener;
+import com.ly.university.assistant.util.DatabaseHelper;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -69,7 +73,7 @@ public class C_A_Schedule_editFragment extends Fragment{
 
 	}
 	
-	static class Schedule_item_Fragment extends Fragment implements OnClickListener{
+	static class Schedule_item_Fragment extends Fragment implements OnClickListener, ClearListener{
 		
 		String updateClassname=null;
 		View editButton=null;
@@ -230,6 +234,11 @@ public class C_A_Schedule_editFragment extends Fragment{
 			}
 		}
 		@Override
+		public void onAttach(Activity activity){
+			super.onAttach(activity);
+			((C_A_ScheduleEditActivity)activity).setOnClearListener(this);
+		}
+		@Override
 		public void onDetach(){
 			super.onDetach();
 			if(db.isOpen()) db.close();
@@ -254,6 +263,25 @@ public class C_A_Schedule_editFragment extends Fragment{
 			AlertDialog alert = builder.create();
 			alert.show();
 		}
+
+		@Override
+		public void clear() {
+			int index = -1;
+			if(editButton !=null){
+				ViewGroup vg=(ViewGroup) editButton.getParent();
+				index = root.indexOfChild(vg);
+			}
+			
+			for(int i =0 ; i<root.getChildCount(); i++){
+				ViewGroup vg = (ViewGroup) root.getChildAt(i);
+				if(i==index){
+				  ((EditText)vg.getChildAt(1)).setText("");
+				  ((EditText)vg.getChildAt(2)).setText("");
+					continue;
+				}
+				((TextView)vg.getChildAt(1)).setText("");
+				  ((TextView)vg.getChildAt(2)).setText("");
+			}
+		}
 	}
-	
 }
